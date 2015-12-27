@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0">
+	 <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+	 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+	</head>
+	<body class="unresolved">
+	<template is="dom-bind">
+	 <template is="dom-repeat" items="{{data}}">
+		<span>{{Question.create_by}}</span>
+	 </template>
+	 <iron-ajax auto id="GetData" url="http://127.0.0.1:5555/user/1" handle-as="json" last-response="{{data}}" ></iron-ajax>
+	</template>
+	</body>
+</html>
