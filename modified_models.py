@@ -26,7 +26,7 @@ class User(Base):
 	def serialize(self):
 	    return {
 	    	'id': self.id,
-	    	'date_joined': self.date_joined,
+	    	'date_joined': str(self.date_joined),
 	    	'email': self.email,
 	    	'password': self.password_hash,
 	    	#created questions needs to be a string not a dict
@@ -73,7 +73,7 @@ class Question(Base):
 	    	'book_id': self.book_id,
 	    	'create_by': self.create_by,
 	    	'options': "\t".join([str(i.serialize['id']) for i in self.options]), # how is this really supposed to be?
-	    	'date_modified': self.date_modified,
+	    	'date_modified': str(self.date_modified),
 	    	'explanation': self.explanation,
 	    	'likes': self.likes,
 	    	'dislikes': self.dislikes
@@ -93,7 +93,7 @@ class Option(Base):
 	def serialize(self):
 	    return {
 	    	'id': self.id,
-	    	'date_modified': self.date_modified,
+	    	'date_modified': str(self.date_modified),
 	    	'question_id': self.question_id,
 	    	'content': self.content
 	    }

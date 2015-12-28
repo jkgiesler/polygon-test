@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import json
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -41,16 +42,20 @@ def push_data():
 
 def getUser(userid):
 	user = session.query(User).filter(User.id == userid)
-	return jsonify(User=[i.serialize for i in user])
+	data = [i.serialize for i in user]
+	#return jsonify(User=[i.serialize for i in user])
+	return json.dumps(data)
 
 def getBookQuestions(bookid):
 	questions = session.query(Question).filter(Question.book_id == bookid)
-	return jsonify(Question=[i.serialize for i in questions])
+	data = [i.serialize for i in questions]
+	return json.dumps(data)
 
 def getQuestionOptions(questionid):
 	options = session.query(Option).filter(Option.question_id == questionid)
-	return jsonify(Option=[i.serialize for i in options])
-
+	data = [i.serialize for i in options]
+	#return jsonify(Option=[i.serialize for i in options])
+	return json.dumps(data)
 if __name__ == '__main__':
 	app.debug = True
 	app.run(host='0.0.0.0', port=5555)

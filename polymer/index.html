@@ -1,16 +1,139 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0">
+	 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
 	 <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
 	 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+	 <link rel="import" href="bower_components/paper-card/paper-card.html">
+	 <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+	 <link rel="import" href="bower_components/paper-item/paper-item.html">
+	 <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+	 <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+
+
+	 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+	  <link rel="import" href="bower_components/paper-item/paper-icon-item.html">
+	    <link rel="import" href="bower_components/paper-item/paper-item-body.html">
+
+
+	 <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+	 <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+
+	 <link rel="import" href="bower_components/paper-styles/demo-pages.html">
+
+	<style is="custom-style">
+	    body {
+	      background-color: var(--paper-grey-50);
+	    }
+
+	        .list {
+      @apply(--layout-vertical);
+      padding-top: 12px;
+      background-color: white;
+      width: 240px;
+      height: 228px;
+      margin: 12px;
+      @apply(--shadow-elevation-2dp);
+    }
+
+    .avatar {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      
+    }
+        .green {
+      background-color: var(--paper-green-300);
+    }
+
+	    .horizontal-section{
+	    	padding:0 !important;
+	    }
+	    #cards {
+	      @apply(--layout-vertical);
+	      @apply(--center-justified);
+	      max-width: 400px;
+	      margin-left: auto;
+	      margin-right: auto;
+	    }
+	    paper-card {
+	      margin-bottom: 16px;
+	      width: 100%;
+	    }
+	    paper-toolbar + paper-toolbar {
+	    margin-top: 20px;
+	    margin-bottom: 10px;
+	    width: 100%;
+	    }
+	    paper-toolbar.red {
+	      --paper-toolbar-background: red;
+	    }
+	    .spacer {
+	      @apply(--layout-flex);
+    	}
+    	    .container {
+      @apply(--layout-wrap);
+      @apply(--layout-center-center);
+      @apply(--layout-inline);
+    }
+    .flex {
+      @apply(--layout-flex);
+    }
+
+        .short {
+      padding-top: 12px;
+      height: 216px;
+    }
+    h4 {
+      margin-left: 24px;
+    }
+	</style>
+
 	</head>
 	<body class="unresolved">
-	<template is="dom-bind">
-	 <template is="dom-repeat" items="{{data}}">
-		<span>{{Question.create_by}}</span>
-	 </template>
-	 <iron-ajax auto id="GetData" url="http://127.0.0.1:5555/user/1" handle-as="json" last-response="{{data}}" ></iron-ajax>
-	</template>
+
+	<paper-drawer-panel>
+		<paper-header-panel drawer>
+			<paper-toolbar class="red"></paper-toolbar>
+
+      <div class="list" role="listbox">
+        <paper-icon-item>
+          <div class="avatar green" style="background-image: url(https://placekitten.com/g/40/40)" item-icon></div>
+          <paper-item-body two-line>
+            <div>Someone's Name</div>
+            <div secondary>Someones Settings</div>
+          </paper-item-body>
+        </paper-icon-item>
+        <paper-item>Another Setting</paper-item> 
+        <paper-item>Yet another Setting</paper-item>
+      </div>
+		</paper-header-panel>
+
+		<paper-header-panel main>
+		<paper-toolbar class="red">
+			    <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+			    <span class="title">Question Toolbar</span>
+			    <paper-icon-button icon="refresh"></paper-icon-button>
+			 	<paper-icon-button icon="add">+</paper-icon-button>
+		</paper-toolbar>
+		<template is="dom-bind">
+		 <template is="dom-repeat" items="{{data}}">
+			<paper-card heading ="A Question">
+				<div class="card-content">
+					<h1>{{item.explanation}}</h1>
+					<h2>likes: {{item.likes}}
+				</div>		
+			</paper-card>
+		 </template>
+		 <iron-ajax auto id="GetData" url="http://127.0.0.1:5555/questions/Bob%20Loblaw's%20Law%20Blog" handle-as="json" last-response="{{data}}" ></iron-ajax>
+		</template>
+
+	</paper-header-panel>
+
+</paper-drawer-panel>
+
 	</body>
 </html>
