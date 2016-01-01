@@ -1,0 +1,60 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-card/paper-card.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+
+<dom-module name="list-questions" id ='list-questions'>
+	 <template>
+	 	<style is="custom-style">
+		body {
+		background-color: var(--paper-grey-50);
+		}
+
+		.horizontal-section{
+		padding:0 !important;
+		width: 100%;
+		}
+		#cards {
+		@apply(--layout-vertical);
+		@apply(--center-justified);
+		max-width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		}
+		paper-card {
+		margin-bottom: 16px;
+		width: 100%;
+		}
+
+		.container {
+		@apply(--layout-wrap);
+		@apply(--layout-center-center);
+		@apply(--layout-inline);
+		}
+		.flex {
+		@apply(--layout-flex);
+		}
+		</style>
+		<template is="dom-bind">
+		<iron-ajax auto id="GetData" url="http://127.0.0.1:5555/questions/Bob%20Loblaw's%20Law%20Blog" handle-as="json" last-response="{{data}}" ></iron-ajax>
+		<iron-list items="{{data}}" as="item">
+		fsdfsdf
+			<paper-card heading ="A Question">
+				<div class="card-content">
+					<h1>[[item.explanation]]</h1>
+					<h2>likes: [[item.likes]]</h2>
+				</div>		
+			</paper-card>
+		</iron-list>
+	</template>
+</template>
+	<script>
+	Polymer({
+		is: 'list-questions',
+		properties: {
+
+		}
+	});
+</script>
+</dom-module>
+

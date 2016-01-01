@@ -10,16 +10,19 @@
 	 <link rel="import" href="bower_components/paper-item/paper-item.html">
 	 <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
 	 <link rel="import" href="bower_components/iron-icons/iron-icons.html">
-
-
 	 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-	  <link rel="import" href="bower_components/paper-item/paper-icon-item.html">
-	    <link rel="import" href="bower_components/paper-item/paper-item-body.html">
-
-
+	 <link rel="import" href="bower_components/paper-item/paper-icon-item.html">
+	 <link rel="import" href="bower_components/paper-item/paper-item-body.html">
 	 <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
-	 <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+	 <link rel="import" href="bower_components/paper-button/paper-button.html">
+	 <link rel="import" href="bower_components/paper-input/paper-input.html">
+	 <link rel="import" href="bower_components/iron-form/iron-form.html">
+	 <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+	 <link rel="import" href="bower_components/iron-pages/iron-pages.html">
 
+	 <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+	 <link rel="import" href="add-data.html">
+	 <link rel="import" href="list-questions.html">
 	 <link rel="import" href="bower_components/paper-styles/demo-pages.html">
 
 	<style is="custom-style">
@@ -45,12 +48,18 @@
       overflow: hidden;
       
     }
-        .green {
+    .green {
       background-color: var(--paper-green-300);
     }
 
+    paper-fab.red {
+    --paper-fab-background: red;
+    --paper-fab-keyboard-focus-background: red;
+    float: right;
+  }
 	    .horizontal-section{
 	    	padding:0 !important;
+	    	width: 100%;
 	    }
 	    #cards {
 	      @apply(--layout-vertical);
@@ -111,26 +120,31 @@
         <paper-item>Yet another Setting</paper-item>
       </div>
 		</paper-header-panel>
-
 		<paper-header-panel main>
 		<paper-toolbar class="red">
 			    <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
 			    <span class="title">Question Toolbar</span>
-			    <paper-icon-button icon="refresh"></paper-icon-button>
-			 	<paper-icon-button icon="add">+</paper-icon-button>
+			    <paper-icon-button icon="arrow-back" onclick="gohome()"></paper-icon-button>
+			 	<paper-icon-button icon="add" onclick="goadd()">+</paper-icon-button>
+		<script>
+			function gohome(){
+				var pages = document.querySelector('iron-pages');
+				pages.selected = "1";
+			}
+			function goadd(){
+				var pages = document.querySelector('iron-pages');
+				pages.selected = "0";
+			}
+		</script>
 		</paper-toolbar>
-		<template is="dom-bind">
-		 <template is="dom-repeat" items="{{data}}">
-			<paper-card heading ="A Question">
-				<div class="card-content">
-					<h1>{{item.explanation}}</h1>
-					<h2>likes: {{item.likes}}
-				</div>		
-			</paper-card>
-		 </template>
-		 <iron-ajax auto id="GetData" url="http://127.0.0.1:5555/questions/Bob%20Loblaw's%20Law%20Blog" handle-as="json" last-response="{{data}}" ></iron-ajax>
-		</template>
 
+		<iron-pages selected="1">
+		<div>
+			<add-data></add-data>
+		</div>
+		<div>
+			<list-questions></list-questions>
+		</div>
 	</paper-header-panel>
 
 </paper-drawer-panel>

@@ -20,13 +20,30 @@ session = DBSession()
 def user(userid):
 	return getUser(userid)
 
-@app.route("/questions/<bookid>")
+@app.route("/questions/<bookid>",methods = ['GET','POST'])
 def book_questions(bookid):
-	return getBookQuestions(bookid)
+	if request.method == 'GET':
+		return getBookQuestions(bookid)
+	elif request.method == 'POST':
+		#Question(book_id="Bob Loblaw's Law Blog",,create_by = 2,explanation = "How do I file for divorce?",likes = 30,dislikes = 10)
+		data = request.form
+		print(data)
+		book_val = data['name']
+		explanation_val = data['question']
+		print(book_val)
+		print(explanation_val)
+		to_input = Question(book_id = book_val,create_by = 2,explanation = explanation_val,likes = 1,dislikes = 0)
+		session.add(to_input)
+		session.commit()
+		return "success"
+
 
 @app.route("/options/<questionid>")
 def question_options(questionid):
 	return getQuestionOptions(questionid)
+
+
+
 
 '''
 @app.route("/testpush")
