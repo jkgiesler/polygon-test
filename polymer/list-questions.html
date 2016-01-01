@@ -1,7 +1,8 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-card/paper-card.html">
 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="bower_components/iron-list/iron-list.html">
+
 
 <dom-module name="list-questions" id ='list-questions'>
 	 <template>
@@ -36,16 +37,18 @@
 		}
 		</style>
 		<template is="dom-bind">
-		<iron-ajax auto id="GetData" url="http://127.0.0.1:5555/questions/Bob%20Loblaw's%20Law%20Blog" handle-as="json" last-response="{{data}}" ></iron-ajax>
+		<iron-ajax auto id="GetData" url="http://127.0.0.1:5555/questions/Bob%20Loblaw's%20Law%20Blog" last-response="{{data}}" ></iron-ajax>
 		<iron-list items="{{data}}" as="item">
-		fsdfsdf
-			<paper-card heading ="A Question">
+		<template>
+			<paper-card>
 				<div class="card-content">
-					<h1>[[item.explanation]]</h1>
-					<h2>likes: [[item.likes]]</h2>
+					<h1>{{item.explanation}}</h1>
+					<h2>likes: {{item.likes}}</h2>
 				</div>		
 			</paper-card>
+		</template>
 		</iron-list>
+
 	</template>
 </template>
 	<script>
